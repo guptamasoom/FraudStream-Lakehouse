@@ -1,0 +1,15 @@
+{
+  "name": "fraud_logins",
+  "primary_key": "event_id",
+  "required": ["event_id", "event_type", "event_timestamp", "customer_id", "device_id"],
+  "fields": {
+    "event_id": "string",
+    "event_type": "string",
+    "event_timestamp": "timestamp",
+    "customer_id": "string",
+    "device_id": "string",
+    "ip_country": "string",
+    "user_agent": "string",
+    "mfa_passed": "boolean"
+  }
+}

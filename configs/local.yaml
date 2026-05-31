@@ -1,0 +1,24 @@
+environment: local
+storage:
+  provider: local
+  local_root: data
+paths:
+  landing: data/landing
+  bronze: data/bronze
+  silver: data/silver
+  gold: data/gold
+  quarantine: data/quarantine
+kafka:
+  bootstrap_servers: localhost:9092
+  topics:
+    transactions: fraud_transactions
+    logins: fraud_logins
+    devices: fraud_devices
+    chargebacks: fraud_chargebacks
+quality:
+  critical_pass_threshold: 0.97
+  freshness_minutes: 30
+fraud:
+  high_risk_threshold: 70
+  medium_risk_threshold: 40
+  velocity_window_minutes: 10

@@ -1,0 +1,20 @@
+environment: prod
+storage:
+  provider: s3
+  bucket: fraudstream-lakehouse
+  region: us-east-1
+paths:
+  landing: s3://fraudstream-lakehouse/landing
+  bronze: s3://fraudstream-lakehouse/bronze
+  silver: s3://fraudstream-lakehouse/silver
+  gold: s3://fraudstream-lakehouse/gold
+  quarantine: s3://fraudstream-lakehouse/quarantine
+kafka:
+  bootstrap_servers: ${KAFKA_BOOTSTRAP_SERVERS}
+quality:
+  critical_pass_threshold: 0.99
+  freshness_minutes: 10
+fraud:
+  high_risk_threshold: 70
+  medium_risk_threshold: 40
+  velocity_window_minutes: 10

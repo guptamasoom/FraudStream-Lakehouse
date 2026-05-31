@@ -1,0 +1,36 @@
+name: FraudStream CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Compile source
+        run: python -m compileall fraudstream tests
+
+      - name: Run tests
+        run: pytest -q
+
+      - name: Secret hygiene check
+        run: |
+          ! grep -R "github_pat_" .
+          ! grep -R "AKIA[0-9A-Z]" .
+

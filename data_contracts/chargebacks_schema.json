@@ -1,0 +1,15 @@
+{
+  "name": "fraud_chargebacks",
+  "primary_key": "event_id",
+  "required": ["event_id", "event_type", "event_timestamp", "transaction_id", "customer_id", "merchant_id"],
+  "fields": {
+    "event_id": "string",
+    "event_type": "string",
+    "event_timestamp": "timestamp",
+    "transaction_id": "string",
+    "customer_id": "string",
+    "merchant_id": "string",
+    "chargeback_amount": "decimal",
+    "reason_code": "string"
+  }
+}

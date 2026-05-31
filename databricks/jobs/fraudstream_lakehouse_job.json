@@ -1,0 +1,26 @@
+{
+  "name": "fraudstream-lakehouse-medallion",
+  "tasks": [
+    {
+      "task_key": "bronze_streaming",
+      "notebook_task": {
+        "notebook_path": "/Repos/fraudstream/databricks/notebooks/01_bronze_streaming"
+      }
+    },
+    {
+      "task_key": "silver_features",
+      "depends_on": [{"task_key": "bronze_streaming"}],
+      "notebook_task": {
+        "notebook_path": "/Repos/fraudstream/databricks/notebooks/02_silver_fraud_features"
+      }
+    },
+    {
+      "task_key": "gold_alerts",
+      "depends_on": [{"task_key": "silver_features"}],
+      "notebook_task": {
+        "notebook_path": "/Repos/fraudstream/databricks/notebooks/03_gold_alerts"
+      }
+    }
+  ]
+}
+
