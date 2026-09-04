@@ -1,5 +1,17 @@
 <h1 align="center">FraudStream Lakehouse</h1>
 
+
+<!-- de-book-banner -->
+> ### Free book: *Data Engineering: From Zero to Production & Interview Ready*
+>
+> 244 pages, by the author of this repo. One order followed through a fictional
+> Indian e-commerce company, with each tool arriving at the moment the story needs
+> it. Every figure in it was measured rather than asserted, and the code behind
+> each one is in the [Field Kit](https://github.com/analyticsdurgesh/data-engineering-book-field-kit).
+>
+> **[Read it free, no card &rarr;](https://www.prepnplaced.com/data-engineering-book?utm_source=github&utm_medium=repo&utm_campaign=de_book)**
+<!-- /de-book-banner -->
+
 <p align="center">
   <b>Real-time fraud detection lakehouse built for data engineering portfolios, student labs, and production-style demos.</b>
 </p>
