@@ -162,17 +162,36 @@ def build_event_batch(fraud_rate: float, bad_data_percentage: float) -> dict[str
 def emit_to_kafka(events: dict[str, list[dict]], bootstrap_servers: str) -> int:
     if KafkaProducer is None:
         raise RuntimeError("kafka-python is not installed.")
+
+    from dotenv import load_dotenv
+    import os
+
+    load_dotenv()
+
     producer = KafkaProducer(
         bootstrap_servers=bootstrap_servers,
+        security_protocol=os.getenv("KAFKA_SECURITY_PROTOCOL", "PLAINTEXT"),
+        sasl_mechanism=os.getenv("KAFKA_SASL_MECHANISMS", "PLAIN"),
+        sasl_plain_username=os.getenv("KAFKA_SASL_USERNAME"),
+        sasl_plain_password=os.getenv("KAFKA_SASL_PASSWORD"),
         value_serializer=lambda value: json.dumps(value).encode("utf-8"),
         key_serializer=lambda value: value.encode("utf-8"),
     )
+
     count = 0
+
     for topic, rows in events.items():
         for row in rows:
-            producer.send(topic, key=str(row.get("customer_id") or "unknown"), value=row)
+            producer.send(
+                topic,
+                key=str(row.get("customer_id") or "unknown"),
+                value=row,
+            )
             count += 1
+
     producer.flush()
+    producer.close()
+
     return count
 
 
